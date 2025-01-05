@@ -1,0 +1,20 @@
+FC = gfortran
+
+FFLAGS = -g
+
+OBJ = nr_module.o nrutil_module.o dmc_module.o ran3_module.o gasdev_module.o potentials_module.o montecarlo.o
+EXEC = montecarlo
+
+all: $(EXEC)
+
+$(EXEC): $(OBJ)
+	$(FC) $(FFLAGS) $(OBJ) -o $@
+
+%.o: %.f90
+	$(FC) $(FFLAGS) -c $<
+
+clean:
+	rm -f $(OBJ) $(EXEC)
+
+rebuild: clean all
+
